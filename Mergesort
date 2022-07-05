@@ -1,0 +1,48 @@
+#divide and conquer algorithm
+#recursive approach
+#splits input list into two halves and 
+#does this again with those halves, then merges
+#these sorted halves together
+
+def mergesort(thislist):
+    if len(thislist) > 1:
+        middle = len(thislist)//2
+        left = thislist[:middle]
+        right = thislist[middle:]
+        #calls function on each half
+        mergesort(left)
+        mergesort(right)
+        #iterators for traversal
+        i=0
+        j=0
+        #iterator for og list
+        k=0
+
+        while i < len(left) and j < len(right):
+            if left[i] <= right[j]:
+                #value from left used
+                thislist[k]=left[i]
+                #increment iterator
+                i+=1
+            else: 
+                thislist[k]=right[j]
+                j+=1
+            #moves to next available
+            k+=1
+
+        #all remaining values handled
+        while i < len(left):
+            thislist[k] = left[i]
+            i+=1
+            k+=1
+
+        while j < len(right):
+            thislist[k] = right[j]
+            j+=1
+            k+=1
+
+#create list of values
+thislist = [72, 31, 4, 67, 96, 95, 87, 103, 10, 3, 23]
+mergesort(thislist)
+print(thislist)
+
